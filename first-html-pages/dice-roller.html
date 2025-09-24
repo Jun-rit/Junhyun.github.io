@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Roller</title>
+  <style>
+    h1{
+      font-family: sans-serif;
+    }
+    /* https://www.w3schools.com/csS/css3_buttons.asp   */
+    button {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    #btn4 {
+      background-color: #9c27b0;
+    }
+    
+    #btn6 {
+      background-color: #04AA6D;
+    }
+    
+    #btn8 {
+      background-color: #ff9800;
+    }
+    
+    #btn10 {
+      background-color: #008CBA;
+    }
+    
+    #btn12 {
+      background-color: #03a9f4;
+    }
+    
+    #btn20 {
+      background-color: #f44336;
+    }
+    
+    #btn100 {
+      background-color: #e91e63;
+    }
+
+    #clearHistory {
+      background-color: #555;
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+    
+    #history {
+      margin-top: 15px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dice Roller!</h1>
+  <div>
+    <button id="btn4">D4</button>
+    <button id="btn6">D6</button>
+    <button id="btn8">D8</button>
+    <button id="btn10">D10</button>
+    <button id="btn12">D12</button>
+    <button id="btn20">D20</button>
+    <button id="btn100">D100</button>
+  </div>
+
+  <hr>
+
+  <div>The roll is: <span id="numberSpan">???</span></div>
+  
+  <div id="history">
+    <h3>Roll History (Latest on Top):</h3>
+    <div id="historyList"></div>
+  </div>
+  
+  <button id="clearHistory">Clear History</button>
+
+  <script>
+    // We are putting the <script> tag at the bottom to make sure that 
+    // the HTML page has loaded before we start trying to hook up button events
+    
+    // The following code is loaded in once, when the HTML page first loads
+    
+    function showRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      let number = Math.floor(Math.random() * (max - min + 1)) + min;
+      numberSpan.innerHTML = number;
+
+      // Create a new history entry and add it to the top of the list
+      const item = document.createElement('div');
+      item.textContent = `Rolled ${number} on D${max}`;
+      historyList.insertBefore(item, historyList.firstChild);
+    }
+
+    // Button event listeners for all dice
+    btn4.onclick = function(){
+      showRandomInt(1, 4);
+    };
+
+    btn6.onclick = function(){
+      showRandomInt(1, 6);
+    };
+
+    btn8.onclick = function(){
+      showRandomInt(1, 8);
+    };
+
+    btn10.onclick = function(){
+      showRandomInt(1, 10);
+    };
+
+    btn12.onclick = function(){
+      showRandomInt(1, 12);
+    };
+
+    btn20.onclick = function(){
+      showRandomInt(1, 20);
+    };
+
+    btn100.onclick = function(){
+      showRandomInt(1, 100);
+    };
+
+    // Clear history button
+    clearHistory.onclick = function() {
+      historyList.innerHTML = '';
+    };
+  </script>
+</body>
+</html>
